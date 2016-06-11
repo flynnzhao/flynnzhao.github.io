@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>Hexo搭建Github静态博客 | Labcode-互联网技术分享</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="题记：搭建本网站纯属一个巧合。在实验室做移动web开发，经常需要用到外网的环境做App测试。奈何实验室配置不给力，就想着自己折腾一个云个主机、申请个域名。想着很容易，但真正做起来才发现真特么麻烦。
+首先在腾讯云上注册了.cn域名，买了个单核的云主机（最低配置，每个月￥65）。但是做域名解析时提示我必须先备案。后来查资料才知道：当域名要解析到内地服务器时，必须备案。所以硬着头皮，按照腾讯云提供的备案">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo搭建Github静态博客">
+<meta property="og:url" content="http://www.labcode.cn/2016/01/02/labcode_hexo_introduce/index.html">
+<meta property="og:site_name" content="Labcode-互联网技术分享">
+<meta property="og:description" content="题记：搭建本网站纯属一个巧合。在实验室做移动web开发，经常需要用到外网的环境做App测试。奈何实验室配置不给力，就想着自己折腾一个云个主机、申请个域名。想着很容易，但真正做起来才发现真特么麻烦。
+首先在腾讯云上注册了.cn域名，买了个单核的云主机（最低配置，每个月￥65）。但是做域名解析时提示我必须先备案。后来查资料才知道：当域名要解析到内地服务器时，必须备案。所以硬着头皮，按照腾讯云提供的备案">
+<meta property="og:image" content="http://i.niupic.com/images/2016/06/09/tUZdcC.png">
+<meta property="og:image" content="http://i.niupic.com/images/2016/06/09/qrhhwv.png">
+<meta property="og:image" content="http://i.niupic.com/images/2016/06/09/fAGqlG.png">
+<meta property="og:image" content="http://i.niupic.com/images/2016/06/09/3nCBIi.png">
+<meta property="og:image" content="http://i.niupic.com/images/2016/06/09/Q5OnVf.png">
+<meta property="og:image" content="http://i.niupic.com/images/2016/06/09/HP5bdk.png">
+<meta property="og:image" content="http://i.niupic.com/images/2016/06/09/v6hrO8.png">
+<meta property="og:image" content="http://i.niupic.com/images/2016/06/09/5UEgkG.png">
+<meta property="og:updated_time" content="2016-06-09T13:04:52.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo搭建Github静态博客">
+<meta name="twitter:description" content="题记：搭建本网站纯属一个巧合。在实验室做移动web开发，经常需要用到外网的环境做App测试。奈何实验室配置不给力，就想着自己折腾一个云个主机、申请个域名。想着很容易，但真正做起来才发现真特么麻烦。
+首先在腾讯云上注册了.cn域名，买了个单核的云主机（最低配置，每个月￥65）。但是做域名解析时提示我必须先备案。后来查资料才知道：当域名要解析到内地服务器时，必须备案。所以硬着头皮，按照腾讯云提供的备案">
+<meta name="twitter:image" content="http://i.niupic.com/images/2016/06/09/tUZdcC.png">
+  
+    <link rel="alternative" href="/atom.xml" title="Labcode-互联网技术分享" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="https://www.niupic.com/images/2016/06/09/512sru.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Labcode</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">九层之台 | 起于累土</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/xiaomo008" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/zhfei1990" title="weibo">weibo</a>
+					        
+								<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/zhao-yun-39-53" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/github/" style="font-size: 20px;">github</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/labcode/" style="font-size: 10px;">labcode</a> <a href="/tags/markdown/" style="font-size: 20px;">markdown</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.labcode.cn">Labcode</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://hexo.io/">hexo</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">苦逼程序员，渴望拥有着大蓝天...</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Labcode</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="https://www.niupic.com/images/2016/06/09/512sru.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Labcode</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">九层之台 | 起于累土</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/xiaomo008" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/zhfei1990" title="weibo">weibo</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/zhao-yun-39-53" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-labcode_hexo_introduce" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/01/02/labcode_hexo_introduce/" class="article-date">
+  	<time datetime="2016-01-02T08:28:38.000Z" itemprop="datePublished">2016-01-02</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Hexo搭建Github静态博客
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/">github</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>题记：</strong><br>搭建本网站纯属一个巧合。在实验室做移动web开发，经常需要用到外网的环境做App测试。奈何实验室配置不给力，就想着自己折腾一个云个主机、申请个域名。想着很容易，但真正做起来才发现真特么麻烦。</p>
+<p>首先在腾讯云上注册了.cn域名，买了个单核的云主机（最低配置，每个月￥65）。但是做域名解析时提示我必须先备案。后来查资料才知道：当域名要解析到内地服务器时，必须备案。所以硬着头皮，按照腾讯云提供的备案流程，签署相关文件，上传凭证，初审，拍照，邮寄材料等等,整套流程下来怎么着也得小1个月的时间（特别是提交管局，竟然提醒我要等20天左右，你懂的，废话就不多说了…）。</p>
+<p>搭建个人博客的框架很多，比较了好多，最后一直在WordPress和Hexo上犹豫不决。首先尝试在云主机上搭建WordPress相关的环境配置，心情绝对是崩溃到不行，那个卡顿啊。因为云主机是单核的单核的单核的（1GB内存，50GB硬盘）。最后义无反顾的选择了Hexo的怀抱，不仅仅省了云主机的钱，相比WordPress的搭建真的太省劲了…</p>
+<hr>
+<p><strong>正文：</strong></p>
+<h3 id="一、hexo是什么？"><a href="#一、hexo是什么？" class="headerlink" title="一、hexo是什么？"></a>一、hexo是什么？</h3><p>   hexo是一款基于Node.js的静态博客框架。通俗点说就是一款基于node的静态博客网站生成器。使用起来相当的简单，它生成静态网页的速度也是快的像风一样。</p>
+<p>   hexo常用命令行：</p>
+<p>npm install hexo -g #安装hexo<br>hexo init  #初始化<br>npm install #安装依赖库</p>
+<p>hexo g  #生成静态页面至public目录<br>hexo s  #开启预览访问端口（默认端口4000，’ctrl + c’关闭server）<br>hexo deploy  #将.deploy目录部署到GitHub</p>
+<p>查看全部命令行，输入hexo help命令，如下图</p>
+<p>   <img src="http://i.niupic.com/images/2016/06/09/tUZdcC.png" alt="此处输入图片的描述"></p>
+<hr>
+<h3 id="二、hexo安装"><a href="#二、hexo安装" class="headerlink" title="二、hexo安装"></a>二、hexo安装</h3><p>1、环境配置<br>  顺着点下一步，除了安装路径以外其余设置保持默认安装配置即可。<br>  安装<a href="http://git-scm.com/download/win" target="_blank" rel="external">Git</a>和<a href="https://nodejs.org/en/" target="_blank" rel="external">node.js</a>。申请github账户，用来托管。</p>
+<p>2、博客搭建</p>
+<ul>
+<li><p>鼠标右键任意地方，选“Git Bush Here” 输入代码安装Hexo</p>
+<p>$ npm install -g hexo</p>
+<p><img src="http://i.niupic.com/images/2016/06/09/qrhhwv.png" alt="此处输入图片的描述"><br>出现上图，说明hexo安装成功。</p>
+</li>
+<li><p>在电脑D盘新建一个文件夹（用于存放生成的hexo相关文件），在该文件夹内右键“Git<br>Bush Here”输入以下两条命令代码</p>
+<p>  $ hexo init</p>
+<p>  $ npm install</p>
+<p>至此，hexo依赖包安装结束。</p>
+</li>
+<li><p>生成博客的静态网页，输入一下两条命令代码</p>
+<p>   $ hexo g</p>
+<p>   $ hexo s</p>
+<p><img src="http://i.niupic.com/images/2016/06/09/fAGqlG.png" alt="此处输入图片的描述"></p>
+<p>如果看到如图所示的最后一行提示，恭喜你，博客的雏形已经搭建完成。打开浏览器访问：<a href="http://localhost:4000/" target="_blank" rel="external">http://localhost:4000/</a></p>
+<p><img src="http://i.niupic.com/images/2016/06/09/3nCBIi.png" alt="此处输入图片的描述"></p>
+<p>这是hexo默认样式的apparence 。hexo官网有很多漂亮的主题，也有很多个人开发的第三方主题，可根据自己的喜好去调整。具体的怎么更换这里就不再赘述。</p>
+</li>
+</ul>
+<h3 id="三、github部署"><a href="#三、github部署" class="headerlink" title="三、github部署"></a>三、github部署</h3><ol>
+<li><p>新建repository</p>
+<p>new一个与你用户名对应的public权限的repository，仓库名必须为【your_user_name.github.io】,就是你注册github账户名。</p>
+<p><img src="http://i.niupic.com/images/2016/06/09/Q5OnVf.png" alt="此处输入图片的描述"></p>
+</li>
+<li><p>部署静态博客<br>打开本地hexo下的配置文件_config.yml，并配置好部署信息。</p>
+<p><img src="http://i.niupic.com/images/2016/06/09/HP5bdk.png" alt="此处输入图片的描述"><br>部署信息如下<br>deploy:<br>  type: git<br>  repository:<a href="https://github.com/your_user_name/your_user_name.github.io.git" target="_blank" rel="external">https://github.com/your_user_name/your_user_name.github.io.git</a><br>  branch: master</p>
+<p>配置好_config.yml并保存后，执行以下命令部署到Github上。</p>
+<p> $ npm install hexo-deployer-git –save</p>
+<p> $ hexo g</p>
+<p> $ hexo d</p>
+<p> 执行“$ hexo d ”命令时如果一切顺利，过程中会弹出两个窗口，一个是提醒输入github账户用户名，一个是输入github账户密码。</p>
+</li>
+</ol>
+<ol>
+<li>成功部署后后浏览器输入your_user_name.github.io，是不是可以访问了，有没有很开心！！！</li>
+</ol>
+<h3 id="四、绑定个人独立域名"><a href="#四、绑定个人独立域名" class="headerlink" title="四、绑定个人独立域名"></a>四、绑定个人独立域名</h3><ol>
+<li><p>绑定域名之前，先要做好域名解析。<br>在哪个平台购买的域名，就在哪儿做CNAME。因为这没有独立的云主机，所以做域名解析的时候只需把个人独立域名解析到github下的个人域名“your_user_name.github.io”即可。例如博主在腾讯云域名注册平台申请的域名，在域名管理里可以这样做解析，如图</p>
+<p><img src="http://i.niupic.com/images/2016/06/09/v6hrO8.png" alt="此处输入图片的描述"></p>
+</li>
+<li><p>github上打开上文建立的repository，new file一个CNAME文件，输入您的个人域名。例如：labcode.cn 。  保存后退出。此时浏览器输入个人域名，奇迹就发生了。</p>
+<p><img src="http://i.niupic.com/images/2016/06/09/5UEgkG.png" alt="此处输入图片的描述"></p>
+</li>
+</ol>
+<p>  <a href="http://www.labcode.cn">结束语：码文不易，转载前请注明出处，谢谢！</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/12/25/hello/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Hello Labcode</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="labcode_hexo_introduce" data-title="Hexo搭建Github静态博客" data-url="http://www.labcode.cn/2016/01/02/labcode_hexo_introduce/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Labcode
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
