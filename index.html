@@ -114,7 +114,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/github/" style="font-size: 20px;">github</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/labcode/" style="font-size: 10px;">labcode</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a>
+						<a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/github/" style="font-size: 20px;">github</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/labcode/" style="font-size: 10px;">labcode</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/百度地图/" style="font-size: 10px;">百度地图</a> <a href="/tags/签名文件/" style="font-size: 10px;">签名文件</a>
 					</div>
 				</section>
 				
@@ -189,6 +189,72 @@
 </nav>
 
       <div class="body-wrap">
+  
+    <article id="post-labcode_baidukey" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/06/11/labcode_baidukey/" class="article-date">
+  	<time datetime="2016-06-11T07:27:03.755Z" itemprop="datePublished">2016-06-11</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/11/labcode_baidukey/">Android百度地图开发显示不出来-签名文件</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="概述："><a href="#概述：" class="headerlink" title="概述："></a>概述：</h2><p>最近做android百度地图，在严格按照百度地图开放平台提供的key申请流程操作的情况下，地图还是经常显示不出来，或者是在本机的eclipse环境下安装App应用手机可以正常显示地图，但是把project导入到另一台电脑的eclipse下，再手机安装App应用，地图就显示不出来！网上查了大量资料，都是写的一知半解，没有切中问题的要害。本文经过大量测试，发现很多情况下<strong>导致地图显示不出来的罪魁祸是签名文件的问题</strong>所致！</p>
+<h2 id="正文："><a href="#正文：" class="headerlink" title="正文："></a>正文：</h2><ol>
+<li><p>百度地图申请密钥 <a href="http://lbsyun.baidu.com/apiconsole/key" target="_blank" rel="external">http://lbsyun.baidu.com/apiconsole/key</a><br>申请Android SDK密钥详细步骤：<a href="http://lbsyun.baidu.com/index.php?title=androidsdk/guide/key" target="_blank" rel="external">http://lbsyun.baidu.com/index.php?title=androidsdk/guide/key</a><br>单纯的申请百度key，在此不再赘述，上述是百度官方的链接，有很详尽的说明。<br><img src="http://i.niupic.com/images/2016/06/11/vM6eWf.png" alt="此处输入图片的描述"></p>
+</li>
+<li><p><strong>问题的核心</strong>在于：<br>获取安全码。安全码的组成规则为：Android签名证书的sha1值+packagename例如：<br>SHA1：BB:0D:AC:74:D3:21:E1:43:67:71:9B:62:91:AF:A1:66:6E:44:5D:75<br>包名：com.baidumap.demo<br>而这个SHA1是Android签名证书来生成的，sha1的正确与否直接导致地图的是否正确显示。<br><img src="http://i.niupic.com/images/2016/06/11/kPudZs.png" alt="此处输入图片的描述"><br>eclipse会给每个开发者自动分配一个debug.keystore用于测试开发用。但是当我们正式发布App的时候需要重新对App打包签名，而此时的签名文件是有别于debug.keystore的！如果此时百度key的sha1却还是由debug.keystore生成的，那么您App中集成的百度地图肯定会出现显示的问题！这个时候您只需要重新用新生成的签名文件申请百度key写入到App中，百度地图在经过签名文件打包安装到手机就肯定不会再出现显示的问题。</p>
+</li>
+<li><p>命令行方法获取签名文件的SHA1值：<br>第一步：可以把签名文件拷贝到方便找到的目标文件夹或者直接cd到目标文件目录下。<br>第二步：keytool -list -keystore debug.keystore。（新申请的签名文件替换debug.keystore）<br>第三步：输入签名文件的口令之后，就回显示您需要的SHA1值。<br><img src="http://i.niupic.com/images/2016/06/11/AiHo9m.png" alt="此处输入图片的描述"></p>
+</li>
+</ol>
+<p><a href="http://www.labcode.cn">结束语：原创博文，转载前请注明出处，谢谢！</a></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/百度地图/">百度地图</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/签名文件/">签名文件</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-labcode_hexo_introduce" class="article article-type-post" itemscope itemprop="blogPost">
   
